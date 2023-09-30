@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Algorithms.Other
 {
@@ -27,19 +27,19 @@ namespace Algorithms.Other
             double saturation,
             double value)
         {
-            if (hue < 0 || hue > 360)
+            if (hue is < 0 or > 360)
             {
                 throw new ArgumentOutOfRangeException(nameof(hue), $"{nameof(hue)} should be between 0 and 360");
             }
 
-            if (saturation < 0 || saturation > 1)
+            if (saturation is < 0 or > 1)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(saturation),
                     $"{nameof(saturation)} should be between 0 and 1");
             }
 
-            if (value < 0 || value > 1)
+            if (value is < 0 or > 1)
             {
                 throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(value)} should be between 0 and 1");
             }
@@ -104,31 +104,31 @@ namespace Algorithms.Other
             byte green;
             byte blue;
 
-            if (hueSection >= 0 && hueSection <= 1)
+            if (hueSection is >= 0 and <= 1)
             {
                 red = ConvertToByte(chroma + matchValue);
                 green = ConvertToByte(secondLargestComponent + matchValue);
                 blue = ConvertToByte(matchValue);
             }
-            else if (hueSection > 1 && hueSection <= 2)
+            else if (hueSection is > 1 and <= 2)
             {
                 red = ConvertToByte(secondLargestComponent + matchValue);
                 green = ConvertToByte(chroma + matchValue);
                 blue = ConvertToByte(matchValue);
             }
-            else if (hueSection > 2 && hueSection <= 3)
+            else if (hueSection is > 2 and <= 3)
             {
                 red = ConvertToByte(matchValue);
                 green = ConvertToByte(chroma + matchValue);
                 blue = ConvertToByte(secondLargestComponent + matchValue);
             }
-            else if (hueSection > 3 && hueSection <= 4)
+            else if (hueSection is > 3 and <= 4)
             {
                 red = ConvertToByte(matchValue);
                 green = ConvertToByte(secondLargestComponent + matchValue);
                 blue = ConvertToByte(chroma + matchValue);
             }
-            else if (hueSection > 4 && hueSection <= 5)
+            else if (hueSection is > 4 and <= 5)
             {
                 red = ConvertToByte(secondLargestComponent + matchValue);
                 green = ConvertToByte(matchValue);

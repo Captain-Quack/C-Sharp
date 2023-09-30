@@ -1,4 +1,4 @@
-﻿// Original Author: Christian Bender
+// Original Author: Christian Bender
 // Class: BitArray
 //
 // implements IComparable, ICloneable, IEnumerator, IEnumerable
@@ -837,6 +837,6 @@ namespace DataStructures
         /// </summary>
         /// <param name="sequence">String sequence.</param>
         /// <returns>returns True if sequence contains only zeros and ones; False otherwise.</returns>
-        private static bool Match(string sequence) => sequence.All(ch => ch == '0' || ch == '1');
+        private static bool Match(string sequence) => sequence.All(ch => ch is '0' or '1');
     }
 }

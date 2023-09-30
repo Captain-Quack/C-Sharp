@@ -56,7 +56,7 @@ namespace Algorithms.Encoders
 
         private IEnumerable<int> OmitVowels(IEnumerable<int> numbers) => numbers.Where(i => i != 0);
 
-        private IEnumerable<char> OmitHAndW(string text) => text.Where(c => c != 'h' && c != 'w');
+        private IEnumerable<char> OmitHAndW(string text) => text.Where(c => c is not 'h' and not 'w');
 
         private IEnumerable<int> CollapseDoubles(IEnumerable<int> numbers)
         {

@@ -91,7 +91,7 @@ namespace Algorithms.Numeric.Series
         /// <exception cref="ArgumentException">Error value is not on interval (0.0; 1.0).</exception>
         private static double ErrorTermWrapper(double x, double error, Func<double, int, double> term)
         {
-            if (error <= 0.0 || error >= 1.0)
+            if (error is <= 0.0 or >= 1.0)
             {
                 throw new ArgumentException("Error value is not on interval (0.0; 1.0).");
             }
