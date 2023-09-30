@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Algorithms.Search
@@ -29,7 +29,7 @@ namespace Algorithms.Search
             var leftIndex = 0;
             var rightIndex = collection.Count - 1;
 
-            return FindIndex(collection, item, leftIndex, rightIndex);
+            return RecursiveBinarySearcher<T>.FindIndex(collection, item, leftIndex, rightIndex);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Algorithms.Search
         /// <param name="leftIndex">Minimum search range.</param>
         /// <param name="rightIndex">Maximum search range.</param>
         /// <returns>Index of item that equals to item searched for or -1 if none found.</returns>
-        private int FindIndex(IList<T> collection, T item, int leftIndex, int rightIndex)
+        private static int FindIndex(IList<T> collection, T item, int leftIndex, int rightIndex)
         {
             if (leftIndex > rightIndex)
             {
@@ -56,8 +56,8 @@ namespace Algorithms.Search
             return result switch
             {
                 var r when r == 0 => middleIndex,
-                var r when r > 0 => FindIndex(collection, item, middleIndex + 1, rightIndex),
-                var r when r < 0 => FindIndex(collection, item, leftIndex, middleIndex - 1),
+                var r when r > 0 => RecursiveBinarySearcher<T>.FindIndex(collection, item, middleIndex + 1, rightIndex),
+                var r when r < 0 => RecursiveBinarySearcher<T>.FindIndex(collection, item, leftIndex, middleIndex - 1),
                 _ => -1,
             };
         }

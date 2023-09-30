@@ -24,8 +24,7 @@ namespace Algorithms.Tests.Encoders
         [TestCaseSource(nameof(TestData))]
         public void AttemptNysiis(string source, string expected)
         {
-            var enc = new NysiisEncoder();
-            var nysiis = enc.Encode(source);
+            var nysiis = NysiisEncoder.Encode(source);
             Assert.AreEqual(expected, nysiis);
         }
     }

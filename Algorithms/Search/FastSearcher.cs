@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Utilities.Exceptions;
 
 namespace Algorithms.Search
@@ -21,7 +21,7 @@ namespace Algorithms.Search
         /// <param name="item">Term to check against.</param>
         /// <returns>Index of first item that satisfies term.</returns>
         /// <exception cref="ItemNotFoundException"> Gets thrown when the given item couldn't be found in the array.</exception>
-        public int FindIndex(Span<int> array, int item)
+        public static int FindIndex(Span<int> array, int item)
         {
             if (array.Length == 0)
             {
@@ -44,7 +44,7 @@ namespace Algorithms.Search
             return from + FindIndex(array.Slice(from, to - from + 1), item);
         }
 
-        private (int left, int right) ComputeIndices(Span<int> array, int item)
+        private static (int left, int right) ComputeIndices(Span<int> array, int item)
         {
             var indexBinary = array.Length / 2;
 
@@ -62,7 +62,7 @@ namespace Algorithms.Search
                 : (indexInterpolation, indexBinary);
         }
 
-        private (int from, int to) SelectSegment(Span<int> array, int left, int right, int item)
+        private static (int from, int to) SelectSegment(Span<int> array, int left, int right, int item)
         {
             if (item < array[left])
             {

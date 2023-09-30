@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithms.Other
 {
@@ -20,7 +17,7 @@ namespace Algorithms.Other
         /// </summary>
         /// <param name="matrix">Contains a collection of the criterias sets.</param>
         /// <returns>An optimized collection of the criterias sets.</returns>
-        public List<List<decimal>> Optimize(List<List<decimal>> matrix)
+        public static List<List<decimal>> Optimize(List<List<decimal>> matrix)
         {
             var optimizedMatrix = new List<List<decimal>>(matrix.Select(i => i));
             int i = 0;
@@ -54,7 +51,7 @@ namespace Algorithms.Other
         /// <param name="arr1">Criterias of the first decision.</param>
         /// <param name="arr2">Criterias of the second decision.</param>
         /// <returns>Values that represent the smallest difference between criteria of input decisions.</returns>
-        private decimal GetMinimalPairwiseDifference(List<decimal> arr1, List<decimal> arr2)
+        private static decimal GetMinimalPairwiseDifference(List<decimal> arr1, List<decimal> arr2)
         {
             decimal min = decimal.MaxValue;
             if (arr1.Count == arr2.Count)

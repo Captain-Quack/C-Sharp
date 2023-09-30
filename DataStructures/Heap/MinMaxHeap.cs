@@ -188,7 +188,7 @@ namespace DataStructures.Heap
 
         private bool HasChild(int index) => index * 2 + 1 < Count;
 
-        private bool IsGrandchild(int node, int grandchild) => grandchild > 2 && Grandparent(grandchild) == node;
+        private static bool IsGrandchild(int node, int grandchild) => grandchild > 2 && Grandparent(grandchild) == node;
 
         /// <summary>
         ///     Checks if node at index belongs to Min or Max level of the heap.
@@ -197,7 +197,7 @@ namespace DataStructures.Heap
         /// </summary>
         /// <param name="index">Index to check.</param>
         /// <returns>true if index is at Min level; false if it is at Max Level.</returns>
-        private bool IsMinLevelIndex(int index)
+        private static bool IsMinLevelIndex(int index)
         {
             // For all Min levels, value (index + 1) has the leftmost bit set to '1' at even position.
             const uint minLevelsBits = 0x55555555;
@@ -205,9 +205,9 @@ namespace DataStructures.Heap
             return ((index + 1) & minLevelsBits) > ((index + 1) & maxLevelsBits);
         }
 
-        private int Parent(int index) => (index - 1) / 2;
+        private static int Parent(int index) => (index - 1) / 2;
 
-        private int Grandparent(int index) => ((index - 1) / 2 - 1) / 2;
+        private static int Grandparent(int index) => ((index - 1) / 2 - 1) / 2;
 
         /// <summary>
         ///     Assuming that children sub-trees are valid heaps, pushes node to lower levels
@@ -216,7 +216,7 @@ namespace DataStructures.Heap
         /// <param name="index">Node index.</param>
         private void PushDown(int index)
         {
-            if (IsMinLevelIndex(index))
+            if (MinMaxHeap<T>.IsMinLevelIndex(index))
             {
                 PushDownMin(index);
             }
@@ -237,7 +237,7 @@ namespace DataStructures.Heap
 
             // If smaller element are put at min level (as result of swaping), it doesn't affect sub-tree validity.
             // If smaller element are put at max level, PushDownMax() should be called for that node.
-            if (IsGrandchild(index, maxIndex))
+            if (MinMaxHeap<T>.IsGrandchild(index, maxIndex))
             {
                 if (Comparer.Compare(heap[maxIndex], heap[index]) > 0)
                 {
@@ -270,7 +270,7 @@ namespace DataStructures.Heap
 
             // If bigger element are put at max level (as result of swaping), it doesn't affect sub-tree validity.
             // If bigger element are put at min level, PushDownMin() should be called for that node.
-            if (IsGrandchild(index, minIndex))
+            if (MinMaxHeap<T>.IsGrandchild(index, minIndex))
             {
                 if (Comparer.Compare(heap[minIndex], heap[index]) < 0)
                 {
@@ -309,7 +309,7 @@ namespace DataStructures.Heap
 
             var parent = Parent(index);
 
-            if (IsMinLevelIndex(index))
+            if (MinMaxHeap<T>.IsMinLevelIndex(index))
             {
                 if (Comparer.Compare(heap[index], heap[parent]) > 0)
                 {

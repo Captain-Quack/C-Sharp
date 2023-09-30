@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Algorithms.Problems.NQueens
@@ -11,7 +11,7 @@ namespace Algorithms.Problems.NQueens
         /// </summary>
         /// <param name="n">Number of rows.</param>
         /// <returns>All solutions.</returns>
-        public IEnumerable<bool[,]> BacktrackSolve(int n)
+        public static IEnumerable<bool[,]> BacktrackSolve(int n)
         {
             if (n < 0)
             {

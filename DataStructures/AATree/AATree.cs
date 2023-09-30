@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace DataStructures.AATree
@@ -102,7 +102,7 @@ namespace DataStructures.AATree
                 throw new InvalidOperationException("Tree is empty!");
             }
 
-            return GetMax(Root).Key;
+            return AaTree<TKey>.GetMax(Root).Key;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace DataStructures.AATree
                 throw new InvalidOperationException("Tree is empty!");
             }
 
-            return GetMin(Root).Key;
+            return AaTree<TKey>.GetMin(Root).Key;
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace DataStructures.AATree
                 throw new ArgumentException($"Key \"{key}\" already in tree!", nameof(key));
             }
 
-            return Split(Skew(node)) !;
+            return AaTree<TKey>.Split(AaTree<TKey>.Skew(node))!;
         }
 
         /// <summary>
@@ -249,29 +249,29 @@ namespace DataStructures.AATree
 
                 if (node.Left is null)
                 {
-                    var successor = GetMin(node.Right!);
+                    var successor = AaTree<TKey>.GetMin(node.Right!);
                     node.Right = Remove(successor.Key, node.Right);
                     node.Key = successor.Key;
                 }
                 else
                 {
-                    var predecessor = GetMax(node.Left);
+                    var predecessor = AaTree<TKey>.GetMax(node.Left);
                     node.Left = Remove(predecessor.Key, node.Left);
                     node.Key = predecessor.Key;
                 }
             }
 
-            node = DecreaseLevel(node);
-            node = Skew(node);
-            node!.Right = Skew(node.Right);
+            node = AaTree<TKey>.DecreaseLevel(node);
+            node = AaTree<TKey>.Skew(node);
+            node!.Right = AaTree<TKey>.Skew(node.Right);
 
             if (node.Right is not null)
             {
-                node.Right.Right = Skew(node.Right.Right);
+                node.Right.Right = AaTree<TKey>.Skew(node.Right.Right);
             }
 
-            node = Split(node);
-            node!.Right = Split(node.Right);
+            node = AaTree<TKey>.Split(node);
+            node!.Right = AaTree<TKey>.Split(node.Right);
             return node;
         }
 
@@ -296,7 +296,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to traverse from.</param>
         /// <returns>The node with the maximum/right-most element.</returns>
-        private AaTreeNode<TKey> GetMax(AaTreeNode<TKey> node)
+        private static AaTreeNode<TKey> GetMax(AaTreeNode<TKey> node)
         {
             while (true)
             {
@@ -314,7 +314,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to traverse from.</param>
         /// <returns>The node with the minimum/left-most element.</returns>
-        private AaTreeNode<TKey> GetMin(AaTreeNode<TKey> node)
+        private static AaTreeNode<TKey> GetMin(AaTreeNode<TKey> node)
         {
             while (true)
             {
@@ -333,7 +333,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to rebalance from.</param>
         /// <returns>The rebalanced node.</returns>
-        private AaTreeNode<TKey>? Skew(AaTreeNode<TKey>? node)
+        private static AaTreeNode<TKey>? Skew(AaTreeNode<TKey>? node)
         {
             if (node?.Left is null || node.Left.Level != node.Level)
             {
@@ -352,7 +352,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to rebalance from.</param>
         /// <returns>The rebalanced node.</returns>
-        private AaTreeNode<TKey>? Split(AaTreeNode<TKey>? node)
+        private static AaTreeNode<TKey>? Split(AaTreeNode<TKey>? node)
         {
             if (node?.Right?.Right is null || node.Level != node.Right.Right.Level)
             {
@@ -371,7 +371,7 @@ namespace DataStructures.AATree
         /// </summary>
         /// <param name="node">The node to decrease level from.</param>
         /// <returns>The node with modified level.</returns>
-        private AaTreeNode<TKey> DecreaseLevel(AaTreeNode<TKey> node)
+        private static AaTreeNode<TKey> DecreaseLevel(AaTreeNode<TKey> node)
         {
             var newLevel = Math.Min(GetLevel(node.Left), GetLevel(node.Right)) + 1;
             if (newLevel >= node.Level)

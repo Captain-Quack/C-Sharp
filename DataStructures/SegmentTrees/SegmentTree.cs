@@ -52,21 +52,21 @@ namespace DataStructures.SegmentTrees
         /// </summary>
         /// <param name="node">Current node.</param>
         /// <returns>Index of the right child.</returns>
-        protected int Right(int node) => 2 * node + 1;
+        protected static int Right(int node) => 2 * node + 1;
 
         /// <summary>
         ///     Calculates the left child of a node.
         /// </summary>
         /// <param name="node">Current node.</param>
         /// <returns>Index of the left child.</returns>
-        protected int Left(int node) => 2 * node;
+        protected static int Left(int node) => 2 * node;
 
         /// <summary>
         ///     Calculates the parent of a node.
         /// </summary>
         /// <param name="node">Current node.</param>
         /// <returns>Index of the parent node.</returns>
-        protected int Parent(int node) => node / 2;
+        protected static int Parent(int node) => node / 2;
 
         /// <summary>
         ///     Edits a query.

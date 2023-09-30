@@ -1,4 +1,4 @@
-﻿using Algorithms.DataCompression;
+using Algorithms.DataCompression;
 using Algorithms.Sorters.Comparison;
 using FluentAssertions;
 using NUnit.Framework;
@@ -18,12 +18,11 @@ namespace Algorithms.Tests.Compressors
         {
             //Arrange
             var sorter = new BubbleSorter<HuffmanCompressor.ListNode>();
-            var translator = new Translator();
-            var huffman = new HuffmanCompressor(sorter, translator);
+            var huffman = new HuffmanCompressor(sorter);
 
             //Act
             var (compressedText, decompressionKeys) = huffman.Compress(uncompressedText);
-            var decompressedText = translator.Translate(compressedText, decompressionKeys);
+            var decompressedText = Translator.Translate(compressedText, decompressionKeys);
 
             //Assert
             Assert.AreEqual(expectedCompressedText, compressedText);
@@ -37,13 +36,12 @@ namespace Algorithms.Tests.Compressors
         {
             //Arrange
             var sorter = new BubbleSorter<HuffmanCompressor.ListNode>();
-            var translator = new Translator();
-            var huffman = new HuffmanCompressor(sorter, translator);
+            var huffman = new HuffmanCompressor(sorter);
             var text = Randomizer.CreateRandomizer().GetString(length);
 
             //Act
             var (compressedText, decompressionKeys) = huffman.Compress(text);
-            var decompressedText = translator.Translate(compressedText, decompressionKeys);
+            var decompressedText = Translator.Translate(compressedText, decompressionKeys);
 
             //Assert
             Assert.AreEqual(text, decompressedText);

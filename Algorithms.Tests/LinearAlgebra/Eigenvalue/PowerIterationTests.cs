@@ -69,6 +69,6 @@ namespace Algorithms.Tests.LinearAlgebra.Eigenvalue
             actualEigVec.Magnitude().Should().BeApproximately(eigenvector.Magnitude(), epsilon);
         }
 
-        private double[] StartVector(int length) => new Random(111111).NextVector(length);
+        private static double[] StartVector(int length) => new Random(111111).NextVector(length);
     }
 }

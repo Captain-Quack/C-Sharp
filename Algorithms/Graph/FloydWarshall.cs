@@ -1,4 +1,3 @@
-using System;
 using DataStructures.Graph;
 
 namespace Algorithms.Graph
@@ -19,7 +18,7 @@ namespace Algorithms.Graph
         /// </returns>
         public double[,] Run(DirectedWeightedGraph<T> graph)
         {
-            var distances = SetupDistances(graph);
+            var distances = FloydWarshall<T>.SetupDistances(graph);
             var vertexCount = distances.GetLength(0);
             for (var k = 0; k < vertexCount; k++)
             {
@@ -42,7 +41,7 @@ namespace Algorithms.Graph
         /// </summary>
         /// <param name="graph">graph to dissect adjacency matrix from.</param>
         /// <returns>the adjacency matrix in the format mentioned in Run.</returns>
-        private double[,] SetupDistances(DirectedWeightedGraph<T> graph)
+        private static double[,] SetupDistances(DirectedWeightedGraph<T> graph)
         {
             var distances = new double[graph.Count, graph.Count];
             for (int i = 0; i < distances.GetLength(0); i++)

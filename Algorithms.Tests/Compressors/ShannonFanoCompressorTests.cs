@@ -1,4 +1,4 @@
-﻿using Algorithms.DataCompression;
+using Algorithms.DataCompression;
 using Algorithms.Knapsack;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
@@ -15,12 +15,11 @@ namespace Algorithms.Tests.Compressors
         {
             //Arrange
             var solver = new NaiveKnapsackSolver<(char, double)>();
-            var translator = new Translator();
-            var shannonFanoCompressor = new ShannonFanoCompressor(solver, translator);
+            var shannonFanoCompressor = new ShannonFanoCompressor(solver);
 
             //Act
             var (compressedText, decompressionKeys) = shannonFanoCompressor.Compress(uncompressedText);
-            var decompressedText = translator.Translate(compressedText, decompressionKeys);
+            var decompressedText = Translator.Translate(compressedText, decompressionKeys);
 
             //Assert
             Assert.AreEqual(expectedCompressedText, compressedText);
@@ -32,13 +31,12 @@ namespace Algorithms.Tests.Compressors
         {
             //Arrange
             var solver = new NaiveKnapsackSolver<(char, double)>();
-            var translator = new Translator();
-            var shannonFanoCompressor = new ShannonFanoCompressor(solver, translator);
+            var shannonFanoCompressor = new ShannonFanoCompressor(solver);
             var text = Randomizer.CreateRandomizer().GetString(length);
 
             //Act
             var (compressedText, decompressionKeys) = shannonFanoCompressor.Compress(text);
-            var decompressedText = translator.Translate(compressedText, decompressionKeys);
+            var decompressedText = Translator.Translate(compressedText, decompressionKeys);
 
             //Assert
             Assert.AreEqual(text, decompressedText);

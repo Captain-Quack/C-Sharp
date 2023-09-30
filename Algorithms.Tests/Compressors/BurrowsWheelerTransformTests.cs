@@ -1,4 +1,4 @@
-﻿using Algorithms.DataCompression;
+using Algorithms.DataCompression;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
@@ -12,9 +12,7 @@ namespace Algorithms.Tests.Compressors
         [TestCase("", "", 0)]
         public void Encode(string input, string expectedString, int expectedIndex)
         {
-            var bwt = new BurrowsWheelerTransform();
-
-            var (encoded, index) = bwt.Encode(input);
+            var (encoded, index) = BurrowsWheelerTransform.Encode(input);
 
             Assert.AreEqual(expectedString, encoded);
             Assert.AreEqual(expectedIndex, index);
@@ -26,9 +24,7 @@ namespace Algorithms.Tests.Compressors
         [TestCase("", 0, "")]
         public void Decode(string encoded, int index, string expected)
         {
-            var bwt = new BurrowsWheelerTransform();
-
-            var result = bwt.Decode(encoded, index);
+            var result = BurrowsWheelerTransform.Decode(encoded, index);
 
             Assert.AreEqual(expected, result);
         }
@@ -37,12 +33,11 @@ namespace Algorithms.Tests.Compressors
         [Repeat(100)]
         public void RandomEncodeDecode()
         {
-            var bwt = new BurrowsWheelerTransform();
             var random = new Randomizer();
             var inputString = random.GetString();
 
-            var (encoded, index) = bwt.Encode(inputString);
-            var result = bwt.Decode(encoded, index);
+            var (encoded, index) = BurrowsWheelerTransform.Encode(inputString);
+            var result = BurrowsWheelerTransform.Decode(encoded, index);
 
             Assert.AreEqual(inputString, result);
         }

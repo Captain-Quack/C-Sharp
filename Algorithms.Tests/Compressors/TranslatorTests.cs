@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Algorithms.DataCompression;
 using NUnit.Framework;
 
@@ -10,7 +10,6 @@ namespace Algorithms.Tests.Compressors
         public static void TranslateCorrectly()
         {
             // Arrange
-            var translator = new Translator();
             var dict = new Dictionary<string, string>
             {
                 { "Hey", "Good day" },
@@ -20,7 +19,7 @@ namespace Algorithms.Tests.Compressors
             };
 
             // Act
-            var translatedText = translator.Translate("Hey man!", dict);
+            var translatedText = Translator.Translate("Hey man!", dict);
 
             // Assert
             Assert.AreEqual("Good day sir.", translatedText);

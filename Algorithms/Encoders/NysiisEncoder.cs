@@ -16,7 +16,7 @@ namespace Algorithms.Encoders
         /// </summary>
         /// <param name="text">The string to encode.</param>
         /// <returns>The NYSIIS encoded string (all uppercase).</returns>
-        public string Encode(string text)
+        public static string Encode(string text)
         {
             text = text.ToUpper(CultureInfo.CurrentCulture);
             text = TrimSpaces(text);
@@ -32,9 +32,9 @@ namespace Algorithms.Encoders
             return TrimEnd(text);
         }
 
-        private string TrimSpaces(string text) => text.Replace(" ", string.Empty);
+        private static string TrimSpaces(string text) => text.Replace(" ", string.Empty);
 
-        private string RemoveDuplicates(string text)
+        private static string RemoveDuplicates(string text)
         {
             var sb = new StringBuilder();
             sb.Append(text[0]);
@@ -49,7 +49,7 @@ namespace Algorithms.Encoders
             return sb.ToString();
         }
 
-        private string TrimEnd(string text)
+        private static string TrimEnd(string text)
         {
             var checks = new (string from, string to)?[]
             {
@@ -67,7 +67,7 @@ namespace Algorithms.Encoders
             return text;
         }
 
-        private string ReplaceStep(string text, int i)
+        private static string ReplaceStep(string text, int i)
         {
             (string from, string to)[] replacements =
             {
@@ -115,7 +115,7 @@ namespace Algorithms.Encoders
             string ReplaceWithPrevious() => Replace(text, i, 1, text[i - 1].ToString());
         }
 
-        private bool TryReplace(string text, int index, (string, string)[] opts, out string result)
+        private static bool TryReplace(string text, int index, (string, string)[] opts, out string result)
         {
             for (var i = 0; i < opts.Length; i++)
             {
@@ -132,7 +132,7 @@ namespace Algorithms.Encoders
             return false;
         }
 
-        private string StartReplace(string start)
+        private static string StartReplace(string start)
         {
             var checks = new (string from, string to)?[]
             {
@@ -153,7 +153,7 @@ namespace Algorithms.Encoders
             return start;
         }
 
-        private string EndReplace(string end)
+        private static string EndReplace(string end)
         {
             var checks = new (string from, string to)?[]
             {
@@ -174,7 +174,7 @@ namespace Algorithms.Encoders
             return end;
         }
 
-        private string Replace(string text, int index, int length, string substitute) =>
-            text[..index] + substitute + text[(index + length) ..];
+        private static string Replace(string text, int index, int length, string substitute) =>
+            text[..index] + substitute + text[(index + length)..];
     }
 }

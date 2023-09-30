@@ -1,10 +1,7 @@
-using Algorithms.Other;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Algorithms.Other;
+using NUnit.Framework;
 
 namespace Algorithms.Tests.Other
 {
@@ -14,8 +11,6 @@ namespace Algorithms.Tests.Other
         public static void Verify_Gauss_Optimization_Positive()
         {
             // Arrange
-            var gaussOptimization = new GaussOptimization();
-
             // Declaration of the constants that are used in the function
             var coefficients = new List<double> { 0.3, 0.6, 2.6, 0.3, 0.2, 1.4 };
 
@@ -47,7 +42,7 @@ namespace Algorithms.Tests.Other
             double eps = Math.Pow(0.1, 10);
 
             // Act
-            (x1, x2) = gaussOptimization.Optimize(func, n, step, eps, x1, x2);
+            (x1, x2) = GaussOptimization.Optimize(func, n, step, eps, x1, x2);
 
             // Assert
             Assert.AreEqual(x1, 1, 0.3);
@@ -58,8 +53,6 @@ namespace Algorithms.Tests.Other
         public static void Verify_Gauss_Optimization_Negative()
         {
             // Arrange
-            var gaussOptimization = new GaussOptimization();
-
             // Declaration of the constants that are used in the function
             var coefficients = new List<double> { -0.3, -0.6, -2.6, -0.3, -0.2, -1.4 };
 
@@ -91,7 +84,7 @@ namespace Algorithms.Tests.Other
             double eps = Math.Pow(0.1, 10);
 
             // Act
-            (x1, x2) = gaussOptimization.Optimize(func, n, step, eps, x1, x2);
+            (x1, x2) = GaussOptimization.Optimize(func, n, step, eps, x1, x2);
 
             // Assert
             Assert.AreEqual(x1, -1, 0.3);

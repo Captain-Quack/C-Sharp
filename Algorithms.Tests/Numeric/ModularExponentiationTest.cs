@@ -1,7 +1,7 @@
-using Algorithms.Numeric;
 using System;
-using NUnit.Framework;
+using Algorithms.Numeric;
 using FluentAssertions;
+using NUnit.Framework;
 
 namespace Algorithms.Tests.Numeric
 {
@@ -17,8 +17,7 @@ namespace Algorithms.Tests.Numeric
         [TestCase(13, 3, 1, 0)]
         public void ModularExponentiationCorrect(int b, int e, int m, int expectedRes)
         {
-            var modularExponentiation = new ModularExponentiation();
-            var actualRes = modularExponentiation.ModularPow(b, e, m);
+            var actualRes = ModularExponentiation.ModularPow(b, e, m);
             actualRes.Should().Be(expectedRes);
         }
 
@@ -27,10 +26,9 @@ namespace Algorithms.Tests.Numeric
         [TestCase(14, 3, 0)]
         public void ModularExponentiationNegativeMod(int b, int e, int m)
         {
-            var modularExponentiation = new ModularExponentiation();
-            Action res = () => modularExponentiation.ModularPow(b, e, m);
+            Action res = () => ModularExponentiation.ModularPow(b, e, m);
             res.Should().Throw<ArgumentException>()
-            .WithMessage(String.Format("{0} is not a positive integer", m));
+            .WithMessage(string.Format("{0} is not a positive integer", m));
         }
     }
 }

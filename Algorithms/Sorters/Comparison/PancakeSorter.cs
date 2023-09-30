@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Algorithms.Sorters.Comparison
 {
@@ -27,7 +27,7 @@ namespace Algorithms.Sorters.Comparison
             {
                 // Find index of the maximum element in
                 // array[0..curr_size-1]
-                var mi = FindMax(array, currSize, comparer);
+                var mi = PancakeSorter<T>.FindMax(array, currSize, comparer);
 
                 // Move the maximum element to end of current array
                 // if it's not already at  the end
@@ -35,25 +35,22 @@ namespace Algorithms.Sorters.Comparison
                 {
                     // To move to the end, first move maximum
                     // number to beginning
-                    Flip(array, mi);
+                    PancakeSorter<T>.Flip(array, mi);
 
                     // Now move the maximum number to end by
                     // reversing current array
-                    Flip(array, currSize - 1);
+                    PancakeSorter<T>.Flip(array, currSize - 1);
                 }
             }
         }
 
         // Reverses array[0..i]
-        private void Flip(T[] array, int i)
+        private static void Flip(T[] array, int i)
         {
-            T temp;
             var start = 0;
             while (start < i)
             {
-                temp = array[start];
-                array[start] = array[i];
-                array[i] = temp;
+                (array[start], array[i]) = (array[i], array[start]);
                 start++;
                 i--;
             }
@@ -61,7 +58,7 @@ namespace Algorithms.Sorters.Comparison
 
         // Returns index of the maximum element
         // in array[0..n-1]
-        private int FindMax(T[] array, int n, IComparer<T> comparer)
+        private static int FindMax(T[] array, int n, IComparer<T> comparer)
         {
             var mi = 0;
             for (var i = 0; i < n; i++)

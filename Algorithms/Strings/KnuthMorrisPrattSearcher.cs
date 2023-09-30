@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Algorithms.Strings
 {
@@ -14,7 +14,7 @@ namespace Algorithms.Strings
         /// <returns>
         ///     The zero-based positions of all occurrences of <paramref name="pat" /> in <paramref name="str" />.
         /// </returns>
-        public IEnumerable<int> FindIndexes(string str, string pat)
+        public static IEnumerable<int> FindIndexes(string str, string pat)
         {
             var lps = FindLongestPrefixSuffixValues(pat);
 
@@ -52,7 +52,7 @@ namespace Algorithms.Strings
         /// </summary>
         /// <param name="pat">pattern to seek.</param>
         /// <returns>The longest prefix suffix values for <paramref name="pat" />.</returns>
-        public int[] FindLongestPrefixSuffixValues(string pat)
+        public static int[] FindLongestPrefixSuffixValues(string pat)
         {
             var lps = new int[pat.Length];
             for (int i = 1, len = 0; i < pat.Length;)

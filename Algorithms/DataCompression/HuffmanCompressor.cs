@@ -13,12 +13,10 @@ namespace Algorithms.DataCompression
     {
         // TODO: Use partial sorter
         private readonly IComparisonSorter<ListNode> sorter;
-        private readonly Translator translator;
 
-        public HuffmanCompressor(IComparisonSorter<ListNode> sorter, Translator translator)
+        public HuffmanCompressor(IComparisonSorter<ListNode> sorter)
         {
             this.sorter = sorter;
-            this.translator = translator;
         }
 
         /// <summary>
@@ -46,7 +44,7 @@ namespace Algorithms.DataCompression
             var nodes = GetListNodesFromText(uncompressedText);
             var tree = GenerateHuffmanTree(nodes);
             var (compressionKeys, decompressionKeys) = GetKeys(tree);
-            return (translator.Translate(uncompressedText, compressionKeys), decompressionKeys);
+            return (Translator.Translate(uncompressedText, compressionKeys), decompressionKeys);
         }
 
         /// <summary>
@@ -70,7 +68,7 @@ namespace Algorithms.DataCompression
             return occurenceCounts.Select(kvp => new ListNode(kvp.Key, 1d * kvp.Value / text.Length)).ToArray();
         }
 
-        private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(
+        private static (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(
             ListNode tree)
         {
             var compressionKeys = new Dictionary<string, string>();

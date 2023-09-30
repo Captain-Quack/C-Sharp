@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace DataStructures.BinarySearchTree
@@ -127,7 +127,7 @@ namespace DataStructures.BinarySearchTree
                 return default;
             }
 
-            return GetMin(Root);
+            return BinarySearchTree<TKey>.GetMin(Root);
         }
 
         /// <summary>
@@ -141,26 +141,26 @@ namespace DataStructures.BinarySearchTree
                 return default;
             }
 
-            return GetMax(Root);
+            return BinarySearchTree<TKey>.GetMax(Root);
         }
 
         /// <summary>
         ///     Returns all the keys in the BST, sorted In-Order.
         /// </summary>
         /// <returns>A list of keys in the BST.</returns>
-        public ICollection<TKey> GetKeysInOrder() => GetKeysInOrder(Root);
+        public ICollection<TKey> GetKeysInOrder() => BinarySearchTree<TKey>.GetKeysInOrder(Root);
 
         /// <summary>
         ///     Returns all the keys in the BST, sorted Pre-Order.
         /// </summary>
         /// <returns>A list of keys in the BST.</returns>
-        public ICollection<TKey> GetKeysPreOrder() => GetKeysPreOrder(Root);
+        public ICollection<TKey> GetKeysPreOrder() => BinarySearchTree<TKey>.GetKeysPreOrder(Root);
 
         /// <summary>
         ///     Returns all the keys in the BST, sorted Post-Order.
         /// </summary>
         /// <returns>A list of keys in the BST.</returns>
-        public ICollection<TKey> GetKeysPostOrder() => GetKeysPostOrder(Root);
+        public ICollection<TKey> GetKeysPostOrder() => BinarySearchTree<TKey>.GetKeysPostOrder(Root);
 
         /// <summary>
         ///     Recursive method to add a key to the BST.
@@ -260,7 +260,7 @@ namespace DataStructures.BinarySearchTree
             // Case 2: Node has two children. (This implementation uses the in-order predecessor to replace node.)
             else
             {
-                var predecessorNode = GetMax(node.Left);
+                var predecessorNode = BinarySearchTree<TKey>.GetMax(node.Left);
                 Remove(Root, Root, predecessorNode.Key);
                 replacementNode = new BinarySearchTreeNode<TKey>(predecessorNode.Key)
                 {
@@ -292,14 +292,14 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="node">Node to search from.</param>
         /// <returns>Node with largest value.</returns>
-        private BinarySearchTreeNode<TKey> GetMax(BinarySearchTreeNode<TKey> node)
+        private static BinarySearchTreeNode<TKey> GetMax(BinarySearchTreeNode<TKey> node)
         {
             if (node.Right is null)
             {
                 return node;
             }
 
-            return GetMax(node.Right);
+            return BinarySearchTree<TKey>.GetMax(node.Right);
         }
 
         /// <summary>
@@ -307,14 +307,14 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="node">Node to search from.</param>
         /// <returns>Node with smallest value.</returns>
-        private BinarySearchTreeNode<TKey> GetMin(BinarySearchTreeNode<TKey> node)
+        private static BinarySearchTreeNode<TKey> GetMin(BinarySearchTreeNode<TKey> node)
         {
             if (node.Left is null)
             {
                 return node;
             }
 
-            return GetMin(node.Left);
+            return BinarySearchTree<TKey>.GetMin(node.Left);
         }
 
         /// <summary>
@@ -322,7 +322,7 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="node">Node to traverse from.</param>
         /// <returns>List of keys in in-order order.</returns>
-        private IList<TKey> GetKeysInOrder(BinarySearchTreeNode<TKey>? node)
+        private static IList<TKey> GetKeysInOrder(BinarySearchTreeNode<TKey>? node)
         {
             if (node is null)
             {
@@ -330,9 +330,9 @@ namespace DataStructures.BinarySearchTree
             }
 
             var result = new List<TKey>();
-            result.AddRange(GetKeysInOrder(node.Left));
+            result.AddRange(BinarySearchTree<TKey>.GetKeysInOrder(node.Left));
             result.Add(node.Key);
-            result.AddRange(GetKeysInOrder(node.Right));
+            result.AddRange(BinarySearchTree<TKey>.GetKeysInOrder(node.Right));
             return result;
         }
 
@@ -341,17 +341,16 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="node">Node to traverse from.</param>
         /// <returns>List of keys in pre-order order.</returns>
-        private IList<TKey> GetKeysPreOrder(BinarySearchTreeNode<TKey>? node)
+        private static IList<TKey> GetKeysPreOrder(BinarySearchTreeNode<TKey>? node)
         {
             if (node is null)
             {
                 return new List<TKey>();
             }
 
-            var result = new List<TKey>();
-            result.Add(node.Key);
-            result.AddRange(GetKeysPreOrder(node.Left));
-            result.AddRange(GetKeysPreOrder(node.Right));
+            var result = new List<TKey> { node.Key };
+            result.AddRange(BinarySearchTree<TKey>.GetKeysPreOrder(node.Left));
+            result.AddRange(BinarySearchTree<TKey>.GetKeysPreOrder(node.Right));
             return result;
         }
 
@@ -360,7 +359,7 @@ namespace DataStructures.BinarySearchTree
         /// </summary>
         /// <param name="node">Node to traverse from.</param>
         /// <returns>List of keys in post-order order.</returns>
-        private IList<TKey> GetKeysPostOrder(BinarySearchTreeNode<TKey>? node)
+        private static IList<TKey> GetKeysPostOrder(BinarySearchTreeNode<TKey>? node)
         {
             if (node is null)
             {
@@ -368,8 +367,8 @@ namespace DataStructures.BinarySearchTree
             }
 
             var result = new List<TKey>();
-            result.AddRange(GetKeysPostOrder(node.Left));
-            result.AddRange(GetKeysPostOrder(node.Right));
+            result.AddRange(BinarySearchTree<TKey>.GetKeysPostOrder(node.Left));
+            result.AddRange(BinarySearchTree<TKey>.GetKeysPostOrder(node.Right));
             result.Add(node.Key);
             return result;
         }

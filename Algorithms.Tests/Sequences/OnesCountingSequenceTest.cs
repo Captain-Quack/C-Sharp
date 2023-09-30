@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Algorithms.Sequences;
@@ -71,20 +71,20 @@ public class OnesCountingSequenceTest
     /// </summary>
     /// <param name="i">BigInteger value to count 1s in</param>
     /// <returns>Number of 1s in binary representation of number.</returns>
-    private int CountOnes(BigInteger i)
+    private static int CountOnes(BigInteger i)
     {
         var        temp      = i;
         BigInteger remainder = 0;
         var        result    = 0;
 
-        while (temp != BigInteger.Zero) {
+        while (temp != BigInteger.Zero)
+        {
             temp = BigInteger.DivRem(temp, 2, out remainder);
             result += remainder.IsOne ? 1 : 0;
         }
 
         return result;
     }
-
 
     [Test]
     public void Count1000()
@@ -99,7 +99,8 @@ public class OnesCountingSequenceTest
     {
         //  Calculate 1s in binary value the old fashioned way.
         var calculated = new List<BigInteger>();
-        for (var i = 0; i < oeisValues.Length; i++) {
+        for (var i = 0; i < oeisValues.Length; i++)
+        {
             calculated.Add(CountOnes(new BigInteger(i)));
         }
 

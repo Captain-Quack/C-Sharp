@@ -3,8 +3,6 @@ using Algorithms.Numeric.Decomposition;
 using FluentAssertions;
 using NUnit.Framework;
 using Utilities.Extensions;
-using M = Utilities.Extensions.MatrixExtensions;
-using V = Utilities.Extensions.VectorExtensions;
 
 namespace Algorithms.Tests.Numeric.Decomposition
 {
@@ -18,7 +16,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             ThinSvd.RandomUnitVector(10).Magnitude().Should().BeApproximately(1, epsilon);
             // unit vector with single element should be [-1] or [+1]
             Math.Abs(ThinSvd.RandomUnitVector(1)[0]).Should().BeApproximately(1, epsilon);
-            // two randomly generated unit vectors should not be equal 
+            // two randomly generated unit vectors should not be equal
             ThinSvd.RandomUnitVector(10).Should().NotBeEquivalentTo(ThinSvd.RandomUnitVector(10));
         }
 
@@ -37,7 +35,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             CheckSvd(matrix);
         }
 
-        private void AssertMatrixEqual(double[,] matrix1, double[,] matrix2, double epsilon)
+        private static void AssertMatrixEqual(double[,] matrix1, double[,] matrix2, double epsilon)
         {
             matrix1.GetLength(0).Should().Be(matrix2.GetLength(0));
             matrix1.GetLength(1).Should().Be(matrix2.GetLength(1));
@@ -50,7 +48,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             }
         }
 
-        private double[,] GenerateRandomMatrix(int m, int n)
+        private static double[,] GenerateRandomMatrix(int m, int n)
         {
             double[,] result = new double[m, n];
             Random random = new();
@@ -65,7 +63,7 @@ namespace Algorithms.Tests.Numeric.Decomposition
             return result;
         }
 
-        private void CheckSvd(double[,] testMatrix)
+        private static void CheckSvd(double[,] testMatrix)
         {
             var epsilon = 1E-6;
             double[,] u;
@@ -128,7 +126,6 @@ namespace Algorithms.Tests.Numeric.Decomposition
             {
                 expanded[i, i] = s[i];
             }
-
 
             // matrix = U * S * V^t, definition of Singular Vector Decomposition
             AssertMatrixEqual(testMatrix, u.Multiply(expanded).Multiply(v.Transpose()), epsilon);

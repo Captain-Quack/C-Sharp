@@ -43,7 +43,7 @@ namespace Algorithms.Encoders
             while (enumerator.MoveNext());
         }
 
-        private IEnumerable<int> PadTo3Numbers(IEnumerable<int> numbers)
+        private static IEnumerable<int> PadTo3Numbers(IEnumerable<int> numbers)
         {
             using var enumerator = numbers.GetEnumerator();
             for (var i = 0; i < 3; i++)
@@ -54,11 +54,11 @@ namespace Algorithms.Encoders
             }
         }
 
-        private IEnumerable<int> OmitVowels(IEnumerable<int> numbers) => numbers.Where(i => i != 0);
+        private static IEnumerable<int> OmitVowels(IEnumerable<int> numbers) => numbers.Where(i => i != 0);
 
-        private IEnumerable<char> OmitHAndW(string text) => text.Where(c => c is not 'h' and not 'w');
+        private static IEnumerable<char> OmitHAndW(string text) => text.Where(c => c is not 'h' and not 'w');
 
-        private IEnumerable<int> CollapseDoubles(IEnumerable<int> numbers)
+        private static IEnumerable<int> CollapseDoubles(IEnumerable<int> numbers)
         {
             var previous = int.MinValue;
             foreach (var i in numbers)

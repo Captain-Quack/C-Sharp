@@ -168,7 +168,7 @@ namespace DataStructures.Heap.FibonacciHeap
             // Since z is leaving the heap, add its children to the root list
             if (z.Child != null)
             {
-                foreach (var x in SiblingIterator(z.Child))
+                foreach (var x in FibonacciHeap<T>.SiblingIterator(z.Child))
                 {
                     x.Parent = null;
                 }
@@ -349,7 +349,7 @@ namespace DataStructures.Heap.FibonacciHeap
 
             // Create slots for every possible node degree of x
             var a = new FHeapNode<T>?[maxDegree];
-            var siblings = SiblingIterator(MinItem).ToList();
+            var siblings = FibonacciHeap<T>.SiblingIterator(MinItem).ToList();
             foreach (var w in siblings)
             {
                 var x = w;
@@ -367,7 +367,7 @@ namespace DataStructures.Heap.FibonacciHeap
                     }
 
                     // Make y a child of x
-                    FibHeapLink(y, x);
+                    FibonacciHeap<T>.FibHeapLink(y, x);
 
                     // Empty out this spot since x now has a higher degree
                     a[d] = null;
@@ -432,7 +432,7 @@ namespace DataStructures.Heap.FibonacciHeap
         /// </summary>
         /// <param name="y">A node to become the child of x.</param>
         /// <param name="x">A node to become the parent of y.</param>
-        private void FibHeapLink(FHeapNode<T> y, FHeapNode<T> x)
+        private static void FibHeapLink(FHeapNode<T> y, FHeapNode<T> x)
         {
             y.Remove();
             x.AddChild(y);
@@ -445,7 +445,7 @@ namespace DataStructures.Heap.FibonacciHeap
         /// </summary>
         /// <param name="node">A node we want the siblings of.</param>
         /// <returns>An iterator over all of the siblings.</returns>
-        private IEnumerable<FHeapNode<T>> SiblingIterator(FHeapNode<T> node)
+        private static IEnumerable<FHeapNode<T>> SiblingIterator(FHeapNode<T> node)
         {
             var currentNode = node;
             yield return currentNode;

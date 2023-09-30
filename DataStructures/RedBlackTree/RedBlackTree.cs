@@ -101,10 +101,11 @@ namespace DataStructures.RedBlackTree
             {
                 addCase = GetAddCase(node);
 
-                switch(addCase)
+                switch (addCase)
                 {
                     case 1:
                         break;
+
                     case 2:
                         var oldParent = node.Parent;
                         node = AddCase2(node);
@@ -115,12 +116,15 @@ namespace DataStructures.RedBlackTree
                         }
 
                         break;
+
                     case 4:
                         node.Color = NodeColor.Black;
                         break;
+
                     case 56:
                         AddCase56(node, comparer.Compare(node.Key, node.Parent!.Key), childDir);
                         break;
+
                     default:
                         throw new InvalidOperationException("It should not be possible to get here!");
                 }
@@ -161,7 +165,7 @@ namespace DataStructures.RedBlackTree
             }
 
             // Delete node
-            DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
+            RedBlackTree<TKey>.DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
 
             // Recolor tree
             do
@@ -212,7 +216,7 @@ namespace DataStructures.RedBlackTree
                 throw new InvalidOperationException("Tree is empty!");
             }
 
-            return GetMin(root).Key;
+            return RedBlackTree<TKey>.GetMin(root).Key;
         }
 
         /// <summary>
@@ -226,7 +230,7 @@ namespace DataStructures.RedBlackTree
                 throw new InvalidOperationException("Tree is empty!");
             }
 
-            return GetMax(root).Key;
+            return RedBlackTree<TKey>.GetMax(root).Key;
         }
 
         /// <summary>
@@ -500,18 +504,23 @@ namespace DataStructures.RedBlackTree
                 case 1:
                     sibling.Color = NodeColor.Red;
                     return node.Parent;
+
                 case 3:
                     RemoveCase3(node, closeNewphew, dir);
                     break;
+
                 case 4:
-                    RemoveCase4(sibling);
+                    RedBlackTree<TKey>.RemoveCase4(sibling);
                     break;
+
                 case 5:
                     RemoveCase5(node, sibling, dir);
                     break;
+
                 case 6:
                     RemoveCase6(node, distantNephew!, dir);
                     break;
+
                 default:
                     throw new InvalidOperationException("It should not be possible to get here!");
             }
@@ -537,7 +546,7 @@ namespace DataStructures.RedBlackTree
             // Node has two children. Swap pointers
             if (node.Left is not null && node.Right is not null)
             {
-                var successor = GetMin(node.Right);
+                var successor = RedBlackTree<TKey>.GetMin(node.Right);
                 node.Key = successor.Key;
                 node = successor;
             }
@@ -546,7 +555,7 @@ namespace DataStructures.RedBlackTree
             if (node.Color == NodeColor.Red)
             {
                 // Node is red so it must have no children since it doesn't have two children
-                DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
+                RedBlackTree<TKey>.DeleteLeaf(node.Parent!, comparer.Compare(node.Key, node.Parent!.Key));
 
                 Count--;
                 return null;
@@ -629,14 +638,14 @@ namespace DataStructures.RedBlackTree
             }
 
             // Final recoloring
-            RemoveCase4(sibling!);
+            RedBlackTree<TKey>.RemoveCase4(sibling!);
         }
 
         /// <summary>
         ///     Perform case 4 of removal.
         /// </summary>
         /// <param name="sibling">Sibling of removed node.</param>
-        private void RemoveCase4(RedBlackTreeNode<TKey> sibling)
+        private static void RemoveCase4(RedBlackTreeNode<TKey> sibling)
         {
             sibling.Color = NodeColor.Red;
             sibling.Parent!.Color = NodeColor.Black;
@@ -724,7 +733,7 @@ namespace DataStructures.RedBlackTree
             }
             else if (child is null)
             {
-                DeleteLeaf(node, dir);
+                RedBlackTree<TKey>.DeleteLeaf(node, dir);
             }
             else if (dir < 0)
             {
@@ -741,7 +750,7 @@ namespace DataStructures.RedBlackTree
         /// </summary>
         /// <param name="node">Parent of leaf node to delete.</param>
         /// <param name="dir">Side of parent leaf is on.</param>
-        private void DeleteLeaf(RedBlackTreeNode<TKey> node, int dir)
+        private static void DeleteLeaf(RedBlackTreeNode<TKey> node, int dir)
         {
             if (dir < 0)
             {
@@ -843,7 +852,7 @@ namespace DataStructures.RedBlackTree
         /// </summary>
         /// <param name="node">Node specifying root of subtree.</param>
         /// <returns>Minimum value in node's subtree.</returns>
-        private RedBlackTreeNode<TKey> GetMin(RedBlackTreeNode<TKey> node)
+        private static RedBlackTreeNode<TKey> GetMin(RedBlackTreeNode<TKey> node)
         {
             while (node.Left is not null)
             {
@@ -859,7 +868,7 @@ namespace DataStructures.RedBlackTree
         /// </summary>
         /// <param name="node">Node specifyng root of subtree.</param>
         /// <returns>Maximum value in node's subtree.</returns>
-        private RedBlackTreeNode<TKey> GetMax(RedBlackTreeNode<TKey> node)
+        private static RedBlackTreeNode<TKey> GetMax(RedBlackTreeNode<TKey> node)
         {
             while (node.Right is not null)
             {

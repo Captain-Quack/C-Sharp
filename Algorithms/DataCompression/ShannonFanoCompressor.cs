@@ -11,14 +11,11 @@ namespace Algorithms.DataCompression
     public class ShannonFanoCompressor
     {
         private readonly IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter;
-        private readonly Translator translator;
 
         public ShannonFanoCompressor(
-            IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter,
-            Translator translator)
+            IHeuristicKnapsackSolver<(char symbol, double frequency)> splitter)
         {
             this.splitter = splitter;
-            this.translator = translator;
         }
 
         /// <summary>
@@ -46,10 +43,10 @@ namespace Algorithms.DataCompression
             var node = GetListNodeFromText(uncompressedText);
             var tree = GenerateShannonFanoTree(node);
             var (compressionKeys, decompressionKeys) = GetKeys(tree);
-            return (translator.Translate(uncompressedText, compressionKeys), decompressionKeys);
+            return (Translator.Translate(uncompressedText, compressionKeys), decompressionKeys);
         }
 
-        private (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(
+        private static (Dictionary<string, string> compressionKeys, Dictionary<string, string> decompressionKeys) GetKeys(
             ListNode tree)
         {
             var compressionKeys = new Dictionary<string, string>();
@@ -99,7 +96,7 @@ namespace Algorithms.DataCompression
         ///     Finds frequency for each character in the text.
         /// </summary>
         /// <returns>Symbol-frequency array.</returns>
-        private ListNode GetListNodeFromText(string text)
+        private static ListNode GetListNodeFromText(string text)
         {
             var occurenceCounts = new Dictionary<char, double>();
 

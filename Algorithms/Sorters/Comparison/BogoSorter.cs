@@ -18,13 +18,13 @@ namespace Algorithms.Sorters.Comparison
         /// <param name="comparer">TODO. 3.</param>
         public void Sort(T[] array, IComparer<T> comparer)
         {
-            while (!IsSorted(array, comparer))
+            while (!BogoSorter<T>.IsSorted(array, comparer))
             {
                 Shuffle(array);
             }
         }
 
-        private bool IsSorted(T[] array, IComparer<T> comparer)
+        private static bool IsSorted(T[] array, IComparer<T> comparer)
         {
             for (var i = 0; i < array.Length - 1; i++)
             {

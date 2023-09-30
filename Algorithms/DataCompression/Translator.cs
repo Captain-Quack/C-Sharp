@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Algorithms.DataCompression
 {
     /// <summary>
-    ///     TODO.
+    ///  Translates text using a provided dictionary.
     /// </summary>
     public class Translator
     {
         /// <summary>
-        ///     TODO.
+        /// Main method for translating text.
         /// </summary>
-        /// <param name="text">TODO. 2.</param>
-        /// <param name="translationKeys">TODO. 3.</param>
+        /// <param name="text">Text to be translated.</param>
+        /// <param name="translationKeys">This contains the translation data. <paramref name="text"/> should be the same language (or source equivalent) as the keys.</param>
         /// <returns>TODO. 4.</returns>
-        public string Translate(string text, Dictionary<string, string> translationKeys)
+        public static string Translate(string text, Dictionary<string, string> translationKeys)
         {
             var sb = new StringBuilder();
 

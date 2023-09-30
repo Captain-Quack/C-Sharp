@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace Algorithms.Encoders
@@ -32,7 +32,7 @@ namespace Algorithms.Encoders
         /// <returns>Decoded text.</returns>
         public string Decode(string text, string key) => Cipher(text, key, caesarEncoder.Decode);
 
-        private string Cipher(string text, string key, Func<string, int, string> symbolCipher)
+        private static string Cipher(string text, string key, Func<string, int, string> symbolCipher)
         {
             key = AppendKey(key, text.Length);
             var encodedTextBuilder = new StringBuilder(text.Length);
@@ -52,7 +52,7 @@ namespace Algorithms.Encoders
             return encodedTextBuilder.ToString();
         }
 
-        private string AppendKey(string key, int length)
+        private static string AppendKey(string key, int length)
         {
             if (string.IsNullOrEmpty(key))
             {

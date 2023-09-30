@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Algorithms.Other
 {
@@ -26,7 +24,7 @@ namespace Algorithms.Other
         /// <param name="x1">The first function parameter.</param>
         /// <param name="x2">The second function parameter.</param>
         /// <returns>A tuple of coordinates of function extremum.</returns>
-        public (double, double) Optimize(
+        public static (double, double) Optimize(
             Func<double, double, double> func,
             double n,
             double step,
@@ -59,12 +57,15 @@ namespace Algorithms.Other
                     case 0:
                         x2 -= step;
                         break;
+
                     case 1:
                         x2 += step;
                         break;
+
                     case 2:
                         x1 -= step;
                         break;
+
                     default:
                         x1 += step;
                         break;

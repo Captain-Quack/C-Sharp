@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Algorithms.Problems.NQueens;
 using FluentAssertions;
@@ -25,7 +25,7 @@ namespace Algorithms.Tests.Problems.NQueens
         {
             // Arrange
             // Act
-            var result = new BacktrackingNQueensSolver().BacktrackSolve(n).ToList();
+            var result = BacktrackingNQueensSolver.BacktrackSolve(n).ToList();
 
             // Assert
             result.Should().HaveCount(expectedNumberOfSolutions);
@@ -42,10 +42,7 @@ namespace Algorithms.Tests.Problems.NQueens
         public static void NCannotBeNegative()
         {
             var n = -1;
-
-            Action act = () => new BacktrackingNQueensSolver().BacktrackSolve(n);
-
-            act.Should().Throw<ArgumentException>();
+            ((Action)(() => BacktrackingNQueensSolver.BacktrackSolve(n))).Should().Throw<ArgumentException>();
         }
 
         private static void ValidateOneQueenPerRow(bool[,] solution)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +57,7 @@ namespace DataStructures.Heap.PairingHeap
         /// </summary>
         public void UpdateKey(T currentValue, T newValue)
         {
-            if(!mapping.ContainsKey(currentValue))
+            if (!mapping.ContainsKey(currentValue))
             {
                 throw new ArgumentException("Current value is not present in this heap.");
             }
@@ -76,7 +76,7 @@ namespace DataStructures.Heap.PairingHeap
                 return;
             }
 
-            DeleteChild(node);
+            PairingHeap<T>.DeleteChild(node);
 
             root = RebuildHeap(root, node);
         }
@@ -170,15 +170,15 @@ namespace DataStructures.Heap.PairingHeap
 
             if (node2 != null && comparer.Compare(node1.Value, node2.Value) <= 0)
             {
-                AddChild(ref node1, node2);
+                PairingHeap<T>.AddChild(ref node1, node2);
                 return node1;
             }
 
-            AddChild(ref node2!, node1);
+            PairingHeap<T>.AddChild(ref node2!, node1);
             return node2;
         }
 
-        private void AddChild(ref PairingHeapNode<T> parent, PairingHeapNode<T> child)
+        private static void AddChild(ref PairingHeapNode<T> parent, PairingHeapNode<T> child)
         {
             if (parent.ChildrenHead == null)
             {
@@ -200,7 +200,7 @@ namespace DataStructures.Heap.PairingHeap
             head.Next = child;
         }
 
-        private void DeleteChild(PairingHeapNode<T> node)
+        private static void DeleteChild(PairingHeapNode<T> node)
         {
             if (node.IsHeadChild)
             {

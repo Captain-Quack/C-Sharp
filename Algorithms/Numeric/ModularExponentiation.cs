@@ -16,7 +16,7 @@ namespace Algorithms.Numeric
         /// <param name="e">Exponent.</param>
         /// <param name="m">Modulus.</param>
         /// <returns>Modular Exponential.</returns>
-        public int ModularPow(int b, int e, int m)
+        public static int ModularPow(int b, int e, int m)
         {
             // initialize result in variable res
             int res = 1;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 
 namespace Algorithms.DataCompression
@@ -16,7 +16,7 @@ namespace Algorithms.DataCompression
         ///     rotation matrix.
         /// </summary>
         /// <param name="s">Input string.</param>
-        public (string encoded, int index) Encode(string s)
+        public static (string encoded, int index) Encode(string s)
         {
             if (s.Length == 0)
             {
@@ -37,7 +37,7 @@ namespace Algorithms.DataCompression
         /// </summary>
         /// <param name="s">Encoded string.</param>
         /// <param name="index">Index  of original string in the sorted rotation matrix.</param>
-        public string Decode(string s, int index)
+        public static string Decode(string s, int index)
         {
             if (s.Length == 0)
             {
@@ -59,7 +59,7 @@ namespace Algorithms.DataCompression
             return rotations[index];
         }
 
-        private string[] GetRotations(string s)
+        private static string[] GetRotations(string s)
         {
             var result = new string[s.Length];
 

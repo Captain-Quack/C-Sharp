@@ -10,8 +10,6 @@ namespace Algorithms.Tests.Other
         public static void Verify_Pareto_Optimization()
         {
             // Arrange
-            var paretoOptimization = new ParetoOptimization();
-
             var matrix = new List<List<decimal>>
             {
                 new() { 7, 6, 5, 8, 5, 6 },
@@ -33,7 +31,7 @@ namespace Algorithms.Tests.Other
             };
 
             // Act
-            var optimizedMatrix = paretoOptimization.Optimize(matrix);
+            var optimizedMatrix = ParetoOptimization.Optimize(matrix);
 
             // Assert
             Assert.AreEqual(optimizedMatrix, expectedMatrix);
